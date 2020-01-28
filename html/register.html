@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+    <script src="static/assets/global/plugins/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+    <div>
+        <h3>获取注册验证码</h3>
+        <div>
+            <label>请输入手机号</label>
+            <input type="text" placeholder="输入手机号" name="telephone" id="telephone"/>
+        </div>
+		<div>
+            <label>请输入验证码</label>
+            <input type="text" placeholder="输入验证码" name="otpCode" id="otpCode"/>
+        </div>
+		<div>
+            <label>请输入用户名</label>
+            <input type="text" placeholder="输入用户名" name="name" id="name"/>
+        </div>
+		<div>
+            <label>请输入性别</label>
+            <input type="text" placeholder="输入性别" name="gender" id="gender"/>
+        </div>
+        <div>
+            <label>请输入年龄</label>
+            <input type="text" placeholder="输入年龄" name="age" id="age"/>
+        </div>
+        <div>
+            <label>请输入密码</label>
+            <input type="password" placeholder="输入密码" name="password" id="password"/>
+        </div>	
+		<div>
+		    <input type="submit" style="display: block;width: 100px;margin: 5px 0 0 100px"
+             id="register" value="提交注册">	
+		</div>
+    </div>
+
+    <script>
+        jQuery(document).ready(function () {
+            //将按钮绑定点击事件，用于向后端发送获取手机验证码的请求
+            $("#register").on("click",function () {
+                let telephone = $("#telephone").val();
+				let password = $("#password").val();
+				let name = $("#name").val();
+				let gender = $("#gender").val();
+				let age = $("#age").val();
+				let otpCode = $("#otpCode").val();
+                if(null == telephone || telephone.length === 0){
+                    alert("手机号不能为空");
+                    return false;
+                }
+                if(null == name || name.length === 0){
+                    alert("用户名不能为空");
+                    return false;
+                }
+                if(null == password || password.length === 0){
+                    alert("密码不能为空");
+                    return false;
+                }
+                if(null == age || age === ""){
+                    alert("年龄不能为空");
+                    return false;
+                }
+                if(null == gender || gender === ""){
+                    alert("性别不能为空");
+                    return false;
+                }	
+                if(null == otpCode || otpCode === ""){
+                    alert("验证码不能为空");
+                    return false;
+                }				
+               $.ajax({
+                   type:'POST',
+                   contentType:'application/x-www-form-urlencoded',
+                   url:'http://localhost:8090/user/register',
+
+                   data:{
+                       'telephone':$("#telephone").val(),
+					   'name':name,
+					   'password':password,
+					   'age':age,
+					   'gender':gender,
+					   'otpCode':otpCode
+                   },
+				   xhrFields:{withCredentials:true},
+                //两个回调函数，分为成功和失败两种情况
+                   success:function (data) {
+                        if("success" == data.status){
+                            alert("注册成功");  
+                        }else{
+						alert("exception");
+							alert("注册失败，原因为："+data.data.errMsg);
+						}
+                    },
+                   error:function (data) {
+						alert("error");
+                       alert("注册失败，原因为："+data.responseText);
+                   },
+               });
+			   return false;
+            });
+        });
+    </script>
+</body>
+</html>

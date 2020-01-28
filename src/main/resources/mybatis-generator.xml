@@ -41,11 +41,11 @@
         </javaClientGenerator>
 
          <!--table指定每个表的生成策略 -->
-        <!--<table tableName="user" domainObjectName="UserDO"-->
-        <!--enableCountByExample="false"-->
-        <!--enableUpdateByExample="false"-->
-        <!--enableDeleteByExample="false"-->
-        <!--enableSelectByExample="false"></table>-->
+        <table tableName="user" domainObjectName="UserDO"
+        enableCountByExample="false"
+        enableUpdateByExample="false"
+        enableDeleteByExample="false"
+        enableSelectByExample="false"></table>
         <table tableName="user_password" domainObjectName="UserPasswordDO"
         enableCountByExample="false"
         enableUpdateByExample="false"

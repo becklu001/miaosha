@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="static/assets/global/plugins/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+    <div>
+        <h3>用户登录</h3>
+        <div>
+            <label>请输入手机号</label>
+            <input type="text" placeholder="输入手机号" name="telephone" id="telephone"/>			
+        </div>
+		<div>
+            <label>请输入密码</label>
+            <input type="text" placeholder="输入密码" name="password" id="password"/>			
+        </div>
+		<div class="form-action">
+			<button class="btn btn-blue" id="login" type="submit">
+			登录
+			</button>
+			<button class="btn btn-blue" id="register" type="submit">
+			注册
+			</button>
+		</div>
+    </div>
+
+    <script>
+        jQuery(document).ready(function () {
+            $("#register").on("click",function(){
+				window.location.href = "getotp.html";
+			});
+			
+			
+            $("#login").on("click",function () {
+                let telephone = $("#telephone").val();
+				let password = $("#password").val();
+                if(null == telephone || telephone.length === 0){
+                    alert("手机号不能为空");
+                    return false;
+                }
+				if(null == password || password === ""){
+                    alert("密码不能为空");
+                    return false;
+                }
+				
+               $.ajax({
+                   type:'POST',
+                   contentType:'application/x-www-form-urlencoded',
+                   url:'http://localhost:8090/user/login',
+
+                   data:{
+                       'telephone':telephone,
+					   'password':password
+                   },
+				   xhrFields:{withCredentials:true},
+                //两个回调函数，分为成功和失败两种情况
+                   success:function (data) {
+                        if("success" == data.status){
+                            alert("登录成功");
+								//window.location.href = "listItem.html";
+                        }else{
+						alert("exception");
+							alert("登录失败，原因为："+data.data.errMsg);
+						}
+                    },
+                   error:function (data) {
+						alert("error");
+                       alert("登录失败，原因为："+data.responseText);
+                   },
+               });
+			   return false;
+            });
+        });
+    </script>
+</body>
+</html>

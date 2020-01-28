@@ -2,10 +2,12 @@ package com.becklu;
 
 import com.becklu.dao.UserDOMapper;
 import com.becklu.dataobject.UserDO;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,20 +17,26 @@ import org.springframework.web.bind.annotation.RestController;
  */
 //@EnableAutoConfiguration
     @SpringBootApplication(scanBasePackages = {"com.becklu"})
-@RestController
-
+//@RestController
+//    @Controller
+@MapperScan("com.becklu.dao")
 public class App 
 {
     @Autowired
     UserDOMapper userDOMapper;
 
-    @RequestMapping("/")
-    public String home(){
+//    @RequestMapping("/")
+    public UserDO home(){
         UserDO userDO = userDOMapper.selectByPrimaryKey(1);
+//        if(null == userDO){
+//            return "用户不存在";
+//        }else{
+//            return userDO.getName();
+//        }
         if(null == userDO){
-            return "用户不存在";
+            return null;
         }else{
-            return userDO.getName();
+            return userDO;
         }
     }
 

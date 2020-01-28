@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="static/assets/global/plugins/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+    <div>
+        <h3>获取注册验证码</h3>
+        <div>
+            <label>请输入手机号</label>
+            <input type="text" placeholder="输入手机号" name="telephone" id="telephone"/>
+            <input type="submit" style="display: block;width: 100px;margin: 5px 0 0 100px"
+                   id="getOtp" value="获取otp短信">
+        </div>
+
+    </div>
+
+    <script>
+        jQuery(document).ready(function () {
+            //将按钮绑定点击事件，用于向后端发送获取手机验证码的请求
+            $("#getOtp").on("click",function () {
+                let telephone = $("#telephone").val();
+                if(null == telephone || telephone.length === 0){
+                    alert("手机号不能为空");
+                    return false;
+                }
+               $.ajax({
+                   type:'POST',
+                   contentType:'application/x-www-form-urlencoded',
+                   url:'http://localhost:8090/user/getotp',
+
+                   data:{
+                       'telephone':$("#telephone").val(),
+                   },
+                //两个回调函数，分为成功和失败两种情况
+                   success:function (data) {
+                        if("success" == data.status){
+                            alert("otp已经发送到了手机上，请注意查收");
+                        }
+                    },
+                   error:function (data) {
+                       alert("otp发送失败，原因为："+data.responseText);
+                   },
+               });
+            });
+        });
+    </script>
+</body>
+</html>
