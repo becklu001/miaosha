@@ -121,7 +121,7 @@ public class UserController extends BaseController{
         }
         UserVO userVO = convertFromModel(userModel);
 
-        //返回通用对象
+        //返回通用对象,将实际数据 userVO包装起来
         return CommonReturnType.create(userVO);
     }
 

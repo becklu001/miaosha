@@ -20,8 +20,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <dependencies>
@@ -144,7 +144,7 @@
             <!--允许移动生成的文件.默认是不可以移动的，其实会生成一些不需要的文件，需要被删除-->
             <verbose>true</verbose>
             <!--实际开发中 overwrite要设置为false，否则有可能覆盖之前的修改，只有第一次需要生成框架文件-->
-            <overwrite>true</overwrite>
+            <overwrite>false</overwrite>
             <configurationFile>
               src/main/resources/mybatis-generator.xml
             </configurationFile>
