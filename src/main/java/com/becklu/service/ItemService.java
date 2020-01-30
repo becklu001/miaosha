@@ -12,4 +12,8 @@ public interface ItemService {
     List<ItemModel> listItems();
     //商品详情浏览接口
     ItemModel getItemById(Integer id);
+    //扣减库存接口
+    boolean decreaseStock(Integer itemId,Integer amount) throws BusinessException;
+    //增加商品销量接口
+    void increaseSales(Integer itemId,Integer amount) throws BusinessException;
 }
