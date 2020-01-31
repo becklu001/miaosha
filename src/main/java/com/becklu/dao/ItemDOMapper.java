@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface ItemDOMapper {
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(ItemDO record);
@@ -21,5 +22,6 @@ public interface ItemDOMapper {
     int updateByPrimaryKey(ItemDO record);
 
     int increaseSales(@Param("itemId")Integer itemId,
-                      @Param("amount") Integer amount);
+                      @Param("amount")Integer amount);
+
 }

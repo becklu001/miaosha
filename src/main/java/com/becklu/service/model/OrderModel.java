@@ -9,7 +9,9 @@ public class OrderModel {
     //商品Id
     private Integer ItemId;
     //商品原价
-    private BigDecimal price;
+//    private BigDecimal price;
+    //是否以秒杀商品下单，不为空表示秒杀下单
+    private Integer promoId;
     //商品实际成交价（考虑促销活动）
     private BigDecimal itemPrice;
     //购买的件数
@@ -25,13 +27,13 @@ public class OrderModel {
         this.id = id;
     }
 
-    public BigDecimal getPrice() {
+/*    public BigDecimal getPrice() {
         return price;
     }
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
+    }*/
 
     public BigDecimal getItemPrice() {
         return itemPrice;
@@ -71,5 +73,13 @@ public class OrderModel {
 
     public void setPayment(BigDecimal payment) {
         this.payment = payment;
+    }
+
+    public Integer getPromoId() {
+        return promoId;
+    }
+
+    public void setPromoId(Integer promoId) {
+        this.promoId = promoId;
     }
 }

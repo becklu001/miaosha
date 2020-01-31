@@ -5,6 +5,8 @@ import com.becklu.error.BusinessException;
 import com.becklu.response.CommonReturnType;
 import com.becklu.service.ItemService;
 import com.becklu.service.model.ItemModel;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -68,6 +70,17 @@ public class ItemController extends BaseController{
         }
         ItemVO itemVO = new ItemVO();
         BeanUtils.copyProperties(itemModel,itemVO);
+        if(itemModel.getPromoModel() != null){
+            //表明有即将开始或者正在进行的秒杀活动
+            itemVO.setPromoStatus(itemModel.getPromoModel().getStatus());
+            itemVO.setPromoId(itemModel.getPromoModel().getId());
+            itemVO.setPromoPrice(itemModel.getPromoModel().getPromoItemPrice());
+            itemVO.setStartDate(itemModel.getPromoModel().getStartDate().toString(
+                    DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
+        }else{
+            //没有秒杀活动，或者秒杀活动已经结束
+            itemVO.setPromoStatus(0);
+        }
         return itemVO;
     }
 }

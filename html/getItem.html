@@ -123,8 +123,11 @@
 				$("#imgUrl").attr("src",g_itemVO.imgUrl);
 				if(g_itemVO.promoStatus === 1){
 					//秒杀活动待开始,需要展示秒杀活动开始时间
+					console.log("活动即将开始。。。。");
+					console.log(g_itemVO.startDate);
 					var startTime = g_itemVO.startDate.replace("-","/");
 					startTime = (new Date(startTime)).getTime();
+					
 					var nowTime = Date.parse(new Date());
 					var delta = (startTime - nowTime)/1000;
 					

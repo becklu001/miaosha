@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 public class ItemModel {
     private Integer id;
 
+    //聚合模型属性，如果promoModel不为空，则表示商品拥有还未结束的秒杀活动
+    private PromoModel promoModel;
     //商品名称
     private String title;
 
@@ -76,4 +78,11 @@ public class ItemModel {
         this.sales = sales;
     }
 
+    public PromoModel getPromoModel() {
+        return promoModel;
+    }
+
+    public void setPromoModel(PromoModel promoModel) {
+        this.promoModel = promoModel;
+    }
 }

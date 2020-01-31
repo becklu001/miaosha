@@ -66,15 +66,15 @@
         enableUpdateByExample="false"
         enableDeleteByExample="false"
         enableSelectByExample="false"></table>-->
-        <table tableName="sequence" domainObjectName="SequenceDO"
+<!--        <table tableName="sequence" domainObjectName="SequenceDO"
         enableCountByExample="false"
         enableUpdateByExample="false"
         enableDeleteByExample="false"
-        enableSelectByExample="false"></table>
-        <!--<table tableName="promo" domainObjectName="PromoDO"-->
-               <!--enableCountByExample="false"-->
-               <!--enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false"-->
-               <!--enableSelectByExample="false"></table>-->
+        enableSelectByExample="false"></table>-->
+        <table tableName="promo" domainObjectName="PromoDO"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"></table>
     </context>
 </generatorConfiguration>

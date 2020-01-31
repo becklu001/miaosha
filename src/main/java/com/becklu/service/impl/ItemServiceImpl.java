@@ -7,7 +7,9 @@ import com.becklu.dataobject.ItemStockDO;
 import com.becklu.error.BusinessException;
 import com.becklu.error.EmBusinessError;
 import com.becklu.service.ItemService;
+import com.becklu.service.PromoService;
 import com.becklu.service.model.ItemModel;
+import com.becklu.service.model.PromoModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +25,8 @@ public class ItemServiceImpl implements ItemService {
     private ItemDOMapper itemDOMapper;
     @Autowired
     private ItemStockDOMapper itemStockDOMapper;
+    @Autowired
+    private PromoService promoService;
 
     @Override
     @Transactional
@@ -63,12 +67,16 @@ public class ItemServiceImpl implements ItemService {
     public ItemModel getItemById(Integer id) {
         ItemDO itemDO = itemDOMapper.selectByPrimaryKey(id);
         ItemStockDO itemStockDO = itemStockDOMapper.selectByItemId(id);
+        PromoModel promoModel = promoService.getPromoByItemId(id);
+
         if(null == itemDO){
             return null;
         }
         //查找库存信息
         ItemModel itemModel = convertItemModelFromDO(itemDO,itemStockDO);
-
+        if(promoModel !=null && promoModel.getStatus()!=3){
+            itemModel.setPromoModel(promoModel);
+        }
         return itemModel;
     }
 
